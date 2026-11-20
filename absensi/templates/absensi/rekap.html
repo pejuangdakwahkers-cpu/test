@@ -1,0 +1,142 @@
+{% extends 'absensi/base.html' %}
+{% load static %}
+
+{% block title %}Rekap Kehadiran{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+
+  <!-- Page Header -->
+  <div>
+    <h1 class="font-heading font-bold text-2xl text-txt">Rekap Kehadiran</h1>
+    <p class="text-muted text-sm mt-0.5">Lihat ringkasan kehadiran siswa berdasarkan rentang tanggal</p>
+  </div>
+
+  <!-- Filters -->
+  <form method="get" class="filter-form bg-card border border-border rounded-card p-4 shadow-card">
+    <div>
+      <label for="kelas-filter">Kelas</label>
+      <select name="kelas" id="kelas-filter" class="min-w-[180px]">
+        <option value="">Semua Kelas</option>
+        {% for kelas in kelas_list %}
+        <option value="{{ kelas.id }}" {% if selected_kelas == kelas.id or selected_kelas|stringformat:"s" == kelas.id|stringformat:"s" %}selected{% endif %}>{{ kelas.nama }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div>
+      <label for="tanggal_dari">Dari Tanggal</label>
+      <input type="date" name="tanggal_dari" id="tanggal_dari" value="{{ tanggal_dari }}">
+    </div>
+
+    <div>
+      <label for="tanggal_sampai">Sampai Tanggal</label>
+      <input type="date" name="tanggal_sampai" id="tanggal_sampai" value="{{ tanggal_sampai }}">
+    </div>
+
+    <div class="flex items-end gap-2">
+      <button type="submit" class="btn btn-primary">
+        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
+        Tampilkan
+      </button>
+
+      {% if rekap_data %}
+      <a href="{% url 'export_excel' %}?kelas={{ selected_kelas|default:'' }}&tanggal_dari={{ tanggal_dari }}&tanggal_sampai={{ tanggal_sampai }}" class="btn btn-success">
+        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
+        Unduh Excel
+      </a>
+      {% endif %}
+    </div>
+  </form>
+
+  {% if rekap_data %}
+  <!-- Rekap Table -->
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th class="w-12">No</th>
+          <th>Nama</th>
+          <th>Kelas</th>
+          <th class="text-center">Hadir</th>
+          <th class="text-center">Terlambat</th>
+          <th class="text-center">Alpa</th>
+          <th class="w-48">Persentase</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in rekap_data %}
+        <tr class="{% if row.persentase < 75 %}row-low-attendance{% endif %}">
+          <td class="font-heading text-xs text-muted">{{ forloop.counter }}</td>
+          <td class="font-medium">{{ row.nama }}</td>
+          <td class="text-muted">{{ row.kelas }}</td>
+          <td class="text-center">
+            <span class="badge badge-hadir">{{ row.hadir }}</span>
+          </td>
+          <td class="text-center">
+            <span class="badge badge-terlambat">{{ row.terlambat }}</span>
+          </td>
+          <td class="text-center">
+            <span class="badge badge-alpa">{{ row.alpa }}</span>
+          </td>
+          <td>
+            <div class="flex items-center gap-2">
+              <div class="progress-bar flex-1">
+                <div class="progress-bar-fill {% if row.persentase < 75 %}low{% endif %}" style="width: {{ row.persentase }}%"></div>
+              </div>
+              <span class="text-xs font-heading font-semibold {% if row.persentase < 75 %}text-danger{% else %}text-success{% endif %} min-w-[3rem] text-right">{{ row.persentase }}%</span>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  {% if page_obj.has_other_pages %}
+  <nav class="pagination" aria-label="Navigasi halaman">
+    {% if page_obj.has_previous %}
+    <a href="?page={{ page_obj.previous_page_number }}&kelas={{ selected_kelas|default:'' }}&tanggal_dari={{ tanggal_dari }}&tanggal_sampai={{ tanggal_sampai }}" aria-label="Halaman sebelumnya">
+      <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" /></svg>
+    </a>
+    {% else %}
+    <span class="disabled" aria-hidden="true">
+      <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" /></svg>
+    </span>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+      <span class="active">{{ num }}</span>
+      {% elif num > page_obj.number|add:"-3" and num < page_obj.number|add:"3" %}
+      <a href="?page={{ num }}&kelas={{ selected_kelas|default:'' }}&tanggal_dari={{ tanggal_dari }}&tanggal_sampai={{ tanggal_sampai }}">{{ num }}</a>
+      {% elif num == 1 or num == page_obj.paginator.num_pages %}
+      <a href="?page={{ num }}&kelas={{ selected_kelas|default:'' }}&tanggal_dari={{ tanggal_dari }}&tanggal_sampai={{ tanggal_sampai }}">{{ num }}</a>
+      {% elif num == page_obj.number|add:"-3" or num == page_obj.number|add:"3" %}
+      <span class="disabled">…</span>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}&kelas={{ selected_kelas|default:'' }}&tanggal_dari={{ tanggal_dari }}&tanggal_sampai={{ tanggal_sampai }}" aria-label="Halaman berikutnya">
+      <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+    </a>
+    {% else %}
+    <span class="disabled" aria-hidden="true">
+      <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+    </span>
+    {% endif %}
+  </nav>
+  {% endif %}
+
+  {% else %}
+  <!-- Empty State -->
+  <div class="empty-state">
+    <svg class="w-12 h-12 text-slate-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" /></svg>
+    <p class="text-sm font-medium text-muted mt-2">Pilih kelas dan rentang tanggal, lalu klik Tampilkan</p>
+  </div>
+  {% endif %}
+
+</div>
+{% endblock %}

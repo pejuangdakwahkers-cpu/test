@@ -1,0 +1,394 @@
+[
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$4kpr666EijNtHEHe8rZxth$kGYZvwr0M75Av2zA8pD124YsyULec77tORYF6EamWw8=",
+    "last_login": "2026-11-17T13:54:01.397Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@sekolah.id",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-11-17T01:18:14.914Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$oVhZt7i49AiDdcpWRfOu6r$B4O0rUJewVimDYDmydeFAlrmPrXdJKvmWlo/+Hnb7go=",
+    "last_login": "2026-11-17T02:21:41.263Z",
+    "is_superuser": false,
+    "username": "guru_wali1",
+    "first_name": "Pak",
+    "last_name": "Budi",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-11-17T01:18:15.142Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "guru_biasa",
+    "first_name": "Bu",
+    "last_name": "Siti",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-11-17T01:18:15.349Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "absensi.kelas",
+  "pk": 1,
+  "fields": {
+    "nama": "X-IPA-1",
+    "wali_kelas": 2
+  }
+},
+{
+  "model": "absensi.kelas",
+  "pk": 2,
+  "fields": {
+    "nama": "X-IPA-2",
+    "wali_kelas": null
+  }
+},
+{
+  "model": "absensi.kelas",
+  "pk": 3,
+  "fields": {
+    "nama": "X-IPS-1",
+    "wali_kelas": null
+  }
+},
+{
+  "model": "absensi.orang",
+  "pk": 1,
+  "fields": {
+    "nama": "Budi Santoso",
+    "kelas": 1,
+    "aktif": true
+  }
+},
+{
+  "model": "absensi.orang",
+  "pk": 2,
+  "fields": {
+    "nama": "Andi Wijaya",
+    "kelas": 1,
+    "aktif": true
+  }
+},
+{
+  "model": "absensi.orang",
+  "pk": 3,
+  "fields": {
+    "nama": "Sari Dewi",
+    "kelas": 1,
+    "aktif": true
+  }
+},
+{
+  "model": "absensi.orang",
+  "pk": 4,
+  "fields": {
+    "nama": "Rini Susanti",
+    "kelas": 2,
+    "aktif": true
+  }
+},
+{
+  "model": "absensi.orang",
+  "pk": 5,
+  "fields": {
+    "nama": "Doni Pratama",
+    "kelas": 2,
+    "aktif": true
+  }
+},
+{
+  "model": "absensi.orang",
+  "pk": 6,
+  "fields": {
+    "nama": "Maya Putri",
+    "kelas": 3,
+    "aktif": true
+  }
+},
+{
+  "model": "absensi.orang",
+  "pk": 7,
+  "fields": {
+    "nama": "Fajar Rahman",
+    "kelas": 3,
+    "aktif": true
+  }
+},
+{
+  "model": "absensi.orang",
+  "pk": 8,
+  "fields": {
+    "nama": "Lina Marlina",
+    "kelas": 1,
+    "aktif": true
+  }
+},
+{
+  "model": "absensi.kartu",
+  "pk": 1,
+  "fields": {
+    "kode_kartu": "SIS0001",
+    "uid": "04A1B2C3D4E580",
+    "orang": 1
+  }
+},
+{
+  "model": "absensi.kartu",
+  "pk": 2,
+  "fields": {
+    "kode_kartu": "SIS0002",
+    "uid": "04A1B2C3D4E581",
+    "orang": 2
+  }
+},
+{
+  "model": "absensi.kartu",
+  "pk": 3,
+  "fields": {
+    "kode_kartu": "SIS0003",
+    "uid": "04A1B2C3D4E582",
+    "orang": 3
+  }
+},
+{
+  "model": "absensi.kartu",
+  "pk": 4,
+  "fields": {
+    "kode_kartu": "SIS0004",
+    "uid": "04A1B2C3D4E583",
+    "orang": 4
+  }
+},
+{
+  "model": "absensi.kartu",
+  "pk": 5,
+  "fields": {
+    "kode_kartu": "SIS0005",
+    "uid": "04A1B2C3D4E584",
+    "orang": 5
+  }
+},
+{
+  "model": "absensi.kartu",
+  "pk": 6,
+  "fields": {
+    "kode_kartu": "SIS0006",
+    "uid": "04A1B2C3D4E585",
+    "orang": 6
+  }
+},
+{
+  "model": "absensi.kartu",
+  "pk": 7,
+  "fields": {
+    "kode_kartu": "SIS0007",
+    "uid": "04A1B2C3D4E586",
+    "orang": 7
+  }
+},
+{
+  "model": "absensi.kartu",
+  "pk": 8,
+  "fields": {
+    "kode_kartu": "SIS0008",
+    "uid": "04A1B2C3D4E587",
+    "orang": 8
+  }
+},
+{
+  "model": "absensi.perangkat",
+  "pk": 1,
+  "fields": {
+    "device_id": "gate-1",
+    "api_key": "test-api-key-12345",
+    "nama_lokasi": "Gerbang Utama",
+    "model_perangkat": "ESP32-WROOM",
+    "aktif": true
+  }
+},
+{
+  "model": "absensi.logtap",
+  "pk": 1,
+  "fields": {
+    "orang": 1,
+    "waktu": "2026-11-17T01:18:41.086Z",
+    "perangkat": 1,
+    "data_mentah": {
+      "uid": "04A1B2C3D4E580",
+      "card_code": "SIS0001",
+      "device": "gate-1"
+    }
+  }
+},
+{
+  "model": "absensi.logtap",
+  "pk": 2,
+  "fields": {
+    "orang": 2,
+    "waktu": "2026-11-17T01:20:05.304Z",
+    "perangkat": 1,
+    "data_mentah": {
+      "uid": "",
+      "card_code": "SIS0002",
+      "device": "gate-1"
+    }
+  }
+},
+{
+  "model": "absensi.logtap",
+  "pk": 3,
+  "fields": {
+    "orang": 3,
+    "waktu": "2026-11-17T01:20:05.854Z",
+    "perangkat": 1,
+    "data_mentah": {
+      "uid": "",
+      "card_code": "SIS0003",
+      "device": "gate-1"
+    }
+  }
+},
+{
+  "model": "absensi.logtap",
+  "pk": 4,
+  "fields": {
+    "orang": 4,
+    "waktu": "2026-11-17T01:20:06.396Z",
+    "perangkat": 1,
+    "data_mentah": {
+      "uid": "",
+      "card_code": "SIS0004",
+      "device": "gate-1"
+    }
+  }
+},
+{
+  "model": "absensi.logtap",
+  "pk": 5,
+  "fields": {
+    "orang": 6,
+    "waktu": "2026-11-17T01:20:06.943Z",
+    "perangkat": 1,
+    "data_mentah": {
+      "uid": "",
+      "card_code": "SIS0006",
+      "device": "gate-1"
+    }
+  }
+},
+{
+  "model": "absensi.kehadiranharian",
+  "pk": 1,
+  "fields": {
+    "orang": 1,
+    "tanggal": "2026-11-17",
+    "jam_tap_pertama": "08:18:41.086",
+    "status": "terlambat"
+  }
+},
+{
+  "model": "absensi.kehadiranharian",
+  "pk": 2,
+  "fields": {
+    "orang": 2,
+    "tanggal": "2026-11-17",
+    "jam_tap_pertama": "08:20:05.304",
+    "status": "terlambat"
+  }
+},
+{
+  "model": "absensi.kehadiranharian",
+  "pk": 3,
+  "fields": {
+    "orang": 3,
+    "tanggal": "2026-11-17",
+    "jam_tap_pertama": "08:20:05.854",
+    "status": "terlambat"
+  }
+},
+{
+  "model": "absensi.kehadiranharian",
+  "pk": 4,
+  "fields": {
+    "orang": 4,
+    "tanggal": "2026-11-17",
+    "jam_tap_pertama": "08:20:06.396",
+    "status": "terlambat"
+  }
+},
+{
+  "model": "absensi.kehadiranharian",
+  "pk": 5,
+  "fields": {
+    "orang": 6,
+    "tanggal": "2026-11-17",
+    "jam_tap_pertama": "08:20:06.943",
+    "status": "terlambat"
+  }
+},
+{
+  "model": "absensi.kehadiranharian",
+  "pk": 6,
+  "fields": {
+    "orang": 8,
+    "tanggal": "2026-11-17",
+    "jam_tap_pertama": null,
+    "status": "alpa"
+  }
+},
+{
+  "model": "absensi.kehadiranharian",
+  "pk": 7,
+  "fields": {
+    "orang": 5,
+    "tanggal": "2026-11-17",
+    "jam_tap_pertama": null,
+    "status": "alpa"
+  }
+},
+{
+  "model": "absensi.kehadiranharian",
+  "pk": 8,
+  "fields": {
+    "orang": 7,
+    "tanggal": "2026-11-17",
+    "jam_tap_pertama": null,
+    "status": "alpa"
+  }
+},
+{
+  "model": "absensi.pengaturan",
+  "pk": 1,
+  "fields": {
+    "jam_masuk": "06:45:00",
+    "zona_waktu": "Asia/Jakarta",
+    "jendela_tap_ganda_detik": 60
+  }
+}
+]
